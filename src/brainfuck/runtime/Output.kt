@@ -1,15 +1,16 @@
 package brainfuck.runtime
 
-import brainfuck.impl.runtime.io.*
-import java.io.Writer
+import brainfuck.impl.runtime.io.BFAppendableOutput
+import brainfuck.impl.runtime.io.BFDebugOutput
+import brainfuck.impl.runtime.io.BFNullaryOutput
+import brainfuck.impl.runtime.io.BFSystemOutput
 
 interface Output {
 
     companion object {
         val NULLARY: Output = BFNullaryOutput
         val SYSTEM: Output = BFSystemOutput
-        fun ofWriter(writer: Writer): Output = BFWriterOutput(writer)
-        operator fun Output.plus(other: Output): Output = BFChainOutput(this, other)
+        fun of(output: Appendable): Output = BFAppendableOutput(output)
     }
 
     fun write(o: Int)
