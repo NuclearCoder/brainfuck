@@ -13,7 +13,7 @@ object BrainfuckREPL {
 
         val context = Context {
             input = Input.SYSTEM
-            output = Output.of(sb)
+            output = Output.ofAppendable(sb)
         }
 
         while (true) {

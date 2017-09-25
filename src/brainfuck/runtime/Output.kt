@@ -10,7 +10,7 @@ interface Output {
     companion object {
         val NULLARY: Output = BFNullaryOutput
         val SYSTEM: Output = BFSystemOutput
-        fun of(output: Appendable): Output = BFAppendableOutput(output)
+        fun ofAppendable(output: Appendable): Output = BFAppendableOutput(output)
     }
 
     fun write(o: Int)

@@ -1,13 +1,6 @@
 package brainfuck.impl.parser
 
-import brainfuck.instructions.Decrement
-import brainfuck.instructions.Increment
-import brainfuck.instructions.InstructionQueue
-import brainfuck.instructions.Loop
-import brainfuck.instructions.Read
-import brainfuck.instructions.ShiftLeft
-import brainfuck.instructions.ShiftRight
-import brainfuck.instructions.Write
+import brainfuck.instructions.*
 import brainfuck.parser.Parser
 import brainfuck.parser.Token
 import brainfuck.parser.TokenQueue
@@ -18,7 +11,7 @@ internal object BFParser : Parser {
 
     private fun parse(tokens: TokenQueue, depth: Int): InstructionQueue = InstructionQueue().also {
         while (tokens.isNotEmpty()) {
-            val token = tokens.remove()
+            val token = tokens.removeFirst()
             if (token == Token.END_LOOP) {
                 if (depth <= 0)
                     throw IllegalStateException("Closed inexistent loop")
@@ -34,7 +27,7 @@ internal object BFParser : Parser {
                 Token.START_LOOP -> Loop(parse(tokens, depth + 1))
                 else -> null
             } ?: continue
-            it.add(instruction)
+            it.addLast(instruction)
         }
         if (depth > 0)
             throw IllegalStateException("Unclosed loop")

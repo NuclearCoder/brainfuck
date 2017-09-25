@@ -2,6 +2,6 @@ package brainfuck.instructions
 
 import java.util.*
 
-class InstructionQueue : Queue<Instruction> by LinkedList<Instruction>() {
-    override fun toString() = this.joinToString(", ", "[", "]")
+class InstructionQueue : LinkedList<Instruction>() {
+    override fun toString() = joinToString(", ", "[", "]")
 }
